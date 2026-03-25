@@ -1,0 +1,9 @@
+\frametitle{Python Plot: Displacement vs Time}
+\begin{lstlisting}
+plt.xlabel("Time")
+plt.ylabel("Displacement")
+plt.title("Transient to Steady-State Response")
+plt.legend()
+plt.grid()
+plt.show()
+\end{lstlisting}

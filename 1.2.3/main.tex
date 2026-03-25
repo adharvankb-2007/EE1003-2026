@@ -1,0 +1,327 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{lmodern}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\setbeamertemplate{page number in head/foot}{}
+
+\title{1.2.3 - Newton-Raphson: Cube Root}
+\date{March 25, 2026}
+\author{ADHARVAN KSHATHRIYA BOMMAGANI - EE25BTECH11003}
+
+\begin{document}
+
+\frame{\titlepage}
+
+% Question
+\begin{frame}{Question}
+The Newton-Raphson iteration formula to find a cube root of a positive number $c$ is:
+
+\begin{enumerate}[label=\alph*)]
+    \item $x_{k+1} = \dfrac{2x_k^3 + \sqrt[3]{c}}{3x_k^2}$
+    \vspace{0.3cm}
+    \item $x_{k+1} = \dfrac{2x_k^3 - \sqrt[3]{c}}{-3x_k^2}$
+    \vspace{0.3cm}
+    \item $x_{k+1} = \dfrac{2x_k^3 + c}{3x_k^2}$
+    \vspace{0.3cm}
+    \item $x_{k+1} = \dfrac{x_k^3 + c}{3x_k^2}$
+\end{enumerate}
+\end{frame}
+
+% Goal
+\begin{frame}{Step 1: Define the Goal}
+We want to find $x = \sqrt[3]{c}$, i.e., $x^3 = c$, which means:
+\[
+x^3 - c = 0
+\]
+
+So we define:
+\[
+f(x) = x^3 - c
+\]
+
+\begin{itemize}
+    \item Finding $\sqrt[3]{c}$ is the same as finding the \textbf{root} of $f(x) = x^3 - c$
+    \item A root is the value of $x$ where $f(x) = 0$
+\end{itemize}
+\end{frame}
+
+% Newton-Raphson Formula
+\begin{frame}{Step 2: Newton-Raphson Formula}
+The general Newton-Raphson iteration formula is:
+\[
+x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}
+\]
+
+\begin{itemize}
+    \item $x_k$ $\rightarrow$ current guess at step $k$
+    \item $x_{k+1}$ $\rightarrow$ next improved guess
+    \item $f(x_k)$ $\rightarrow$ how far we are from zero
+    \item $f'(x_k)$ $\rightarrow$ slope (derivative) at current guess
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Step by Step Derivation}
+
+\textbf{What we want:}
+
+\begin{itemize}
+\item Find $x$ where $f(x) = 0$ (called the root)
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{STEP 1 — Start with a Guess $x_k$}
+
+\begin{itemize}
+\item Assume a function $f(x)$ and an initial guess $x_k$
+\item At that point, function value is $f(x_k)$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Draw Tangent Line}
+
+The tangent line at point $(x_k, f(x_k))$ has:
+
+\begin{itemize}
+\item Slope $= f'(x_k)$
+\item Passes through $(x_k, f(x_k))$
+\end{itemize}
+
+\vspace{0.5cm}
+
+Equation of tangent line:
+
+\[
+y - f(x_k) = f'(x_k)(x - x_k)
+\]
+
+\end{frame}
+
+\begin{frame}{ Intersection with x-axis}
+
+At x-axis, $y = 0$
+
+\[
+0 - f(x_k) = f'(x_k)(x - x_k)
+\]
+
+\[
+-f(x_k) = f'(x_k)(x - x_k)
+\]
+
+Divide both sides by $f'(x_k)$:
+
+\[
+\frac{-f(x_k)}{f'(x_k)} = x - x_k
+\]
+
+\end{frame}
+
+\begin{frame}{Final Rearrangement}
+
+Rearranging:
+
+\[
+x = x_k - \frac{f(x_k)}{f'(x_k)}
+\]
+
+\vspace{0.5cm}
+
+This becomes the next approximation:
+
+\[
+\boxed{x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}}
+\]
+
+\end{frame}
+
+
+
+
+% Derivative
+\begin{frame}{Step 3: Compute $f'(x)$}
+We have:
+\[
+f(x) = x^3 - c
+\]
+
+Differentiating term by term using the Power Rule $\dfrac{d}{dx}(x^n) = nx^{n-1}$:
+
+\begin{align}
+f'(x) &= \frac{d}{dx}(x^3) - \frac{d}{dx}(c) \\[6pt]
+      &= 3x^{3-1} - 0 \\[6pt]
+      &= 3x^2
+\end{align}
+
+\begin{itemize}
+    \item $\dfrac{d}{dx}(c) = 0$ because $c$ is a constant
+\end{itemize}
+\end{frame}
+
+% Substitution
+\begin{frame}{Step 4: Substitute into Formula}
+Substituting $f(x_k) = x_k^3 - c$ and $f'(x_k) = 3x_k^2$:
+
+\begin{align}
+x_{k+1} &= x_k - \frac{x_k^3 - c}{3x_k^2}
+\end{align}
+
+Combine over a common denominator:
+
+\begin{align}
+x_{k+1} &= \frac{3x_k^3 - (x_k^3 - c)}{3x_k^2} \\[6pt]
+         &= \frac{3x_k^3 - x_k^3 + c}{3x_k^2} \\[6pt]
+         &= \frac{2x_k^3 + c}{3x_k^2}
+\end{align}
+\end{frame}
+
+% Identify Correct Option
+\begin{frame}{Step 5: Identify the Correct Option}
+
+\begin{center}
+\renewcommand{\arraystretch}{2.0}
+\begin{tabular}{clc}
+\toprule
+\textbf{Option} & \textbf{Formula} & \textbf{Correct?} \\
+\midrule
+a) & $\dfrac{2x_k^3 + \sqrt[3]{c}}{3x_k^2}$ & $\times$ \small{(has $\sqrt[3]{c}$ not $c$)} \\
+b) & $\dfrac{2x_k^3 - \sqrt[3]{c}}{-3x_k^2}$ & $\times$ \small{(wrong signs)} \\
+c) & $\dfrac{2x_k^3 + c}{3x_k^2}$ & $\checkmark$ \textbf{Correct!} \\
+d) & $\dfrac{x_k^3 + c}{3x_k^2}$ & $\times$ \small{(has $x_k^3$ not $2x_k^3$)} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+% Numerical Example
+\begin{frame}{Numerical Verification: Finding $\sqrt[3]{8}$}
+\textbf{Goal:} Find $\sqrt[3]{8}$ (true answer $= 2$), with $c = 8$, $x_0 = 1$
+
+\vspace{0.3cm}
+
+\textbf{Formula:} $x_{k+1} = \dfrac{2x_k^3 + 8}{3x_k^2}$
+
+\vspace{0.3cm}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{cccc}
+\toprule
+\textbf{Step $k$} & $x_k$ & $x_{k+1}$ & Error $|x_k - 2|$ \\
+\midrule
+0 & 1.000 & 3.333 & 1.000 \\
+1 & 3.333 & 2.462 & 1.333 \\
+2 & 2.462 & 2.081 & 0.462 \\
+3 & 2.081 & 2.003 & 0.081 \\
+4 & 2.003 & 2.000 & 0.003 \\
+5 & \textbf{2.000} & \textbf{2.000} & $\approx 0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{frame}
+
+% Convergence
+\begin{frame}{Convergence Behaviour}
+\begin{itemize}
+    \item Each step uses $x_{k+1} = x_k - \dfrac{f(x_k)}{f'(x_k)}$
+    \item Geometrically: tangent line at $x_k$ crosses $x$-axis at $x_{k+1}$
+    \item $f(x_k)$ tells how big the correction should be
+    \item $f'(x_k)$ tells which direction to correct
+\end{itemize}
+
+\vspace{0.4cm}
+
+\begin{itemize}
+    \item Error decreases \textbf{rapidly} each iteration
+    \item Newton-Raphson has \textbf{quadratic convergence}
+    \item After 5 iterations: answer accurate to 3 decimal places
+\end{itemize}
+\end{frame}
+
+% Final Answer
+\begin{frame}{Final Answer}
+\[
+\boxed{x_{k+1} = \frac{2x_k^3 + c}{3x_k^2}}
+\]
+
+\begin{itemize}
+    \item Correct option: \textbf{(c)}
+\end{itemize}
+\end{frame}
+
+% Python Code 1
+\begin{frame}[fragile]{Python Code: Newton-Raphson for Cube Root}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
+import numpy as np
+import matplotlib.pyplot as plt
+
+def f(x, c):
+    return x**3 - c
+
+def f_prime(x):
+    return 3 * x**2
+
+def newton_raphson(c, x0, tol=1e-10, max_iter=100):
+    x = x0
+    history = [x]
+    for _ in range(max_iter):
+        x_new = x - f(x, c) / f_prime(x)
+        history.append(x_new)
+        if abs(x_new - x) < tol:
+            break
+        x = x_new
+    return x_new, history
+\end{lstlisting}
+\end{frame}
+
+% Python Code 2
+\begin{frame}[fragile]{Python Code: Plot Convergence}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
+c = 8
+x0 = 1.0
+root, history = newton_raphson(c, x0)
+
+errors = [abs(h - 2.0) for h in history]
+
+plt.figure(figsize=(8, 4))
+plt.semilogy(errors, marker='o')
+plt.xlabel("Iteration")
+plt.ylabel("Error |x_k - 2|")
+plt.title("Convergence of Newton-Raphson")
+plt.grid(True)
+plt.tight_layout()
+plt.savefig("convergence.png", dpi=150)
+plt.show()
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}{Plot of the error}
+        
+\begin{figure}
+    \centering
+    \includegraphics[width=0.85\linewidth]{image1.png}
+    \caption{Plot of Error}
+\end{figure}
+\end{frame}
+
+
+
+\end{document}

@@ -1,0 +1,18 @@
+\frametitle{Python Code: Plot Convergence}
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
+c = 8
+x0 = 1.0
+root, history = newton_raphson(c, x0)
+
+errors = [abs(h - 2.0) for h in history]
+
+plt.figure(figsize=(8, 4))
+plt.semilogy(errors, marker='o')
+plt.xlabel("Iteration")
+plt.ylabel("Error |x_k - 2|")
+plt.title("Convergence of Newton-Raphson")
+plt.grid(True)
+plt.tight_layout()
+plt.savefig("convergence.png", dpi=150)
+plt.show()
+\end{lstlisting}

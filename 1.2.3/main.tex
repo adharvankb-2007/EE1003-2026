@@ -323,5 +323,95 @@ plt.show()
 \end{frame}
 
 
+% Python Code 1
+\begin{frame}[fragile]{Python Code: Newton-Raphson for Cube Root}
+\begin{lstlisting}import numpy as np
+import matplotlib.pyplot as plt
+# Define the function and its derivative
+def f(x):
+    return x**3 - 8
+def df(x):
+    return 3*x**2
+# Range for plotting the function curve
+x_vals = np.linspace(1.5, 4.5, 400)
+y_vals = f(x_vals)
+plt.plot(x_vals, y_vals, label=r'$f(x) = 
+x^3 - 8$', color='black', linewidth=2)
+plt.axhline(0, color='black', linewidth=0.8)
+plt.axvline(0, color='black', linewidth=0.8)
+# Newton-Raphson Iterations setup
+x_n = 4.0  # Initial guess
+iterations = 6
+# Using a colormap to distinguish between many iterations
+cmap = plt.get_cmap('viridis')
+colors = [cmap(i) for i in np.linspace(0, 1, iterations)]
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code: Newton-Raphson for Cube Root}
+\begin{lstlisting}
+for i in range(iterations):
+y_n = f(x_n)
+slope = df(x_n)
+# Newton-Raphson step
+x_next = x_n - y_n / slope
+# Plot vertical segment from (x_n, 0) to (x_n, f(x_n))
+plt.vlines(x_n, 0, y_n, colors='gray', linestyles='dotted', alpha=0.5)
+# Plot the tangent line segment from (x_n, f(x_n)) down to the x-axis
+line_x = np.linspace(x_next, x_n, 100)
+line_y = slope * (line_x - x_n) + y_n
+# Labeling only the first few to keep the legend clean
+label = f'Iter {i+1}: $x_{i} \\approx {x_n:.4f}$' if i < 4 else None
+plt.plot(line_x, line_y, color=colors[i], label=label)
+\end{lstlisting}
+\end{frame}
+
+% Python Code 2
+\begin{frame}[fragile]{Python Code: Illustration}
+\begin{lstlisting}
+# Plot the tangent line segment from (x_n, f(x_n)) down to the x-axis
+line_x = np.linspace(x_next, x_n, 100)
+line_y = slope * (line_x - x_n) + y_n
+# Labeling only the first few to keep the legend clean
+label = f'Iter {i+1}: $x_{i} \\approx {x_n:.4f}$' if i < 4 else None
+plt.plot(line_x, line_y, color=colors[i], label=label)
+# Mark the current point on the curve and the next root estimate 
+on the x-axis
+plt.scatter([x_n], [y_n], color=colors[i], s=30, zorder=5)
+# Update x for next iteration
+plt.scatter([x_next], [0], marker='x', color=colors[i], s=50, zorder=5)
+x_n = x_next
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Python Code: Illustration}
+\begin{lstlisting}
+# Final root annotation
+plt.annotate(f'Final Root: {x_n:.6f}', xy=(x_n, 0),
+xytext=(x_n+0.5, 10),
+arrowprops=dict(facecolor='black', shrink=0.05),
+fontsize=10)
+# Formatting the plot
+plt.title(r'Newton-Raphson Method 
+(6 Iterations) for $f(x) = x^3 - 8$')
+plt.xlabel('$x$')
+plt.ylabel('$f(x)$')
+plt.legend(loc='upper left', fontsize='small')
+plt.grid(True, linestyle='--', alpha=0.5)
+plt.xlim(1.5, 4.5)
+plt.ylim(-5, 60)
+# Save the plot
+plt.show()
+\end{lstlisting}
+\end{frame}
+\begin{frame}{The Illustration of the Method}
+          
+\begin{figure}
+    \centering
+    \includegraphics[width=0.85\linewidth]{image2.png}
+    \caption{Newton-Raphson Method}
+    \end{figure}
+\end{frame}
+
 
 \end{document}

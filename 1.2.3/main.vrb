@@ -1,18 +1,19 @@
-\frametitle{Python Code: Plot Convergence}
-\begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
-c = 8
-x0 = 1.0
-root, history = newton_raphson(c, x0)
-
-errors = [abs(h - 2.0) for h in history]
-
-plt.figure(figsize=(8, 4))
-plt.semilogy(errors, marker='o')
-plt.xlabel("Iteration")
-plt.ylabel("Error |x_k - 2|")
-plt.title("Convergence of Newton-Raphson")
-plt.grid(True)
-plt.tight_layout()
-plt.savefig("convergence.png", dpi=150)
+\frametitle{Python Code: Illustration}
+\begin{lstlisting}
+# Final root annotation
+plt.annotate(f'Final Root: {x_n:.6f}', xy=(x_n, 0),
+xytext=(x_n+0.5, 10),
+arrowprops=dict(facecolor='black', shrink=0.05),
+fontsize=10)
+# Formatting the plot
+plt.title(r'Newton-Raphson Method
+(6 Iterations) for $f(x) = x^3 - 8$')
+plt.xlabel('$x$')
+plt.ylabel('$f(x)$')
+plt.legend(loc='upper left', fontsize='small')
+plt.grid(True, linestyle='--', alpha=0.5)
+plt.xlim(1.5, 4.5)
+plt.ylim(-5, 60)
+# Save the plot
 plt.show()
 \end{lstlisting}

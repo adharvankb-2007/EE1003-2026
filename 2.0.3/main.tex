@@ -1,0 +1,99 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{gensymb}
+\usepackage{enumitem}
+\usepackage{etoolbox}
+\setbeamertemplate{page number in head/foot}{}
+
+\title{2.0.3 - Optimization Problem}
+\date{March 30, 2026}
+\author{ADHARVAN KSHATHRIYA BOMMAGANI - EE25BTECH11003}
+
+\begin{document}
+
+\frame{\titlepage}
+
+% Question
+\begin{frame}{Question}
+For real $x$, the maximum value of
+\[
+\frac{e^{\sin x}}{e^{\cos x}}
+\]
+is:
+
+\begin{enumerate}[label=\alph*)]
+    \item $1$
+    \item $e$
+    \item $e^{\sqrt{2}}$
+    \item $\infty$
+\end{enumerate}
+\end{frame}
+
+% Step 1
+\begin{frame}{Simplification}
+\[
+\frac{e^{\sin x}}{e^{\cos x}} = e^{\sin x - \cos x}
+\]
+
+Thus, we need to maximize:
+\[
+\sin x - \cos x
+\]
+\end{frame}
+
+% Step 2
+\begin{frame}{Trigonometric Transformation}
+Using identity:
+\[
+a\sin x + b\cos x = \sqrt{a^2 + b^2}\,\sin(x + \phi)
+\]
+
+\[
+\sin x - \cos x = \sqrt{2}\,\sin\left(x - \frac{\pi}{4}\right)
+\]
+\end{frame}
+
+% Step 3
+\begin{frame}{Maximum Value}
+Since:
+\[
+-1 \leq \sin(\theta) \leq 1
+\]
+
+\[
+\max(\sin x - \cos x) = \sqrt{2}
+\]
+
+Therefore:
+\[
+\max e^{\sin x - \cos x} = e^{\sqrt{2}}
+\]
+\end{frame}
+
+% Final Answer
+\begin{frame}{Final Answer}
+\[
+\boxed{e^{\sqrt{2}}}
+\]
+
+\begin{itemize}
+    \item Correct option: \textbf{(c)}
+\end{itemize}
+\end{frame}
+
+\end{document}
